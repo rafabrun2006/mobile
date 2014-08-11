@@ -1,97 +1,65 @@
 <!DOCTYPE html>
 <html ng-app="App">
 <head>
-    <title>App</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--link rel="stylesheet" href="jquery-mobile-css.css"-->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
-    <script src="jquery.js"></script>
-    <!--script src="jquery-mobile.js"></script-->
+    <link rel="stylesheet" href="jquery.mobile143/jquery.mobile-1.4.3.css">
+    <script src="jquery-11.min.js"></script>
+    <script src="jquery.mobile143/jquery.mobile-1.4.3.min.js"></script>
+    <!--script src="jquery.mobile143/jquery.mobile-1.4.3.min.map"></script-->
+
     <script src="angular/angular.min.js"></script>
+    <script src="angular/angular-route.min.js"></script>
+
     <script src="firebase.js"></script>
+    <script src="firebase-simple-login.js"></script>
     <script src="an.firebase.js"></script>
-    <script>
-        App = angular.module('App', ['firebase'])
-                .value('fbURL', 'https://d3n0nc3.firebaseio.com/users')
-                .factory('Pessoa', function ($firebase, fbURL) {
-                    return $firebase(new Firebase(fbURL)).$asArray();
-                });
 
-        App.controller('Pessoa', function ($log, $scope, Pessoa) {
-            $log.info('--Inicio--');
-
-            var fb = new Firebase('https://d3n0nc3.firebaseio.com/users');
-
-            $scope.Pessoa = Pessoa;
-
-            $scope.remover = function (row) {
-                $scope.Pessoa.$remove(row);
-            };
-
-            $scope.add = function () {
-                fb.push({nome: $scope.nome, email: $scope.email});
-                $scope.Pessoa.$add({nome: $scope.nome, email: $scope.email});
-            }
-
-            $scope.edit = function (row) {
-
-                $scope.Pessoa.$remove(row);
-                $scope.nome = row.nome;
-                $scope.email = row.email;
-            };
-
-            $scope.setOrder = function (param) {
-                $scope.order = param;
-                $log.info($scope.order);
-            };
-
-            $log.info('--Fim--');
-        });
-    </script>
+    <script src="ConfigAngular.js"></script>
+    <script src="MainAngular.js"></script>
 </head>
-<body>
-<div class="content-fluid" data-role="page" style="border: 1px solid #CCC; border-radius: 5px; padding: 4px;">
-    <h3 data-role="header" style="text-align: center;">App Angular Firebase</h3>
-
-    <div class="row-fluid" data-role="content" ng-controller="Pessoa">
-        <input class="span2" type="text" placeholder="Filter" ng-model="search">
-        <table class="table table-hover">
-            <thead>
-            <th><a class="btn btn-link" ng-click="order = 'nome'" href="#nome">Nome</a></th>
-            <th style="width: 20px;"><a class="btn btn-link" ng-click="order = 'email'" href="#email">Email</a></th>
-            <th>-</th>
-            <th>-</th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="row in Pessoa | filter:search | orderBy:order">
-                <td>{{ row.nome }}</td>
-                <td>{{ row.email }}</td>
-                <td>
-                    <a href="#" class="" ng-click="edit(row)">
-                        <i class="icon-edit"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="#" class="" ng-click="remover(row)">
-                        <i class="icon-trash"></i>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <form class="form-inline">
-            <input class="span1" type="text" ng-model="nome" placeholder="Nome">
-            <input type="email" class="span1" ng-model="email" placeholder="Email">
-            <br/>
-            <br/>
-            <button data-role="button" class="btn btn-primary btn-block" ng-click="add()">
-                <i class="icon-plus-sign icon-white"></i>
-                Salvar
-            </button>
-        </form>
+<body ng-app="App">
+<div data-role="page" id="main" ng-controller="Main">
+    <div data-role="header">
+        <h3>Útil</h3>
     </div>
-    <div data-role="footer"></div>
+    <p style="text-align: center;">Olá, {{ session.email }} o que temos pra agora?</p>
+    <div data-role="main" class="ui-content">
+        <button class="ui-btn ui-btn-b ui-corner-all">Roubo Auto</button>
+        <button class="ui-btn ui-btn-b ui-corner-all">Assalto</button>
+        <button class="ui-btn ui-btn-b ui-corner-all">Trânsito</button>
+        <button class="ui-btn ui-btn-b ui-corner-all">Serviço</button>
+        <button class="ui-btn ui-btn-b ui-corner-all">Acidente</button>
+        <button class="ui-btn ui-btn-b ui-corner-all">Achados & Perdidos</button>
+        <button class="ui-btn ui-btn-b ui-corner-all">Informativo</button>
+    </div>
+    <div data-role="footer">
+        <h6>Todos os Direitos Reservado - 2014</h6>
+    </div>
+</div>
+<div data-role="page" id="cadastro" ng-controller="Cadastro">
+    <div data-role="header">
+        <h3>Útil - Cadastro</h3>
+    </div>
+    <div data-role="main" class="ui-content">
+        Faça o seu cadastro para utilizar o aplicativo.
+        <br />
+        <p style="color: #ff0000; font-size: 10px; text-align: justify;">
+            Importante: as suas informações não serão compartilhadas e nem acessadas por outro usuário,
+            este e um aplicativo que leva muito a serio a segurança dos dados dos usuários cadastrados!
+        </p>
+        <br />
+        <input type="email" ng-model="Pessoa.email" placeholder="Endereço de E-mail" required="">
+        <input type="password" ng-model="Pessoa.senha" placeholder="Senha" required="">
+        <br />
+        <div style="text-align: center;" data-role="" data-type="horizontal" data-mini="true">
+            <button ng-click="novoRegistro()" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user ui-btn-b" data-role="">Registrar</button>
+            <button ng-click="esqueciMinhaSenha()" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-lock ui-btn-b">Esqueci Minha Senha</button>
+        </div>
+    </div>
+    <div data-role="footer">
+        <h6>Todos os Direitos Reservado - 2014</h6>
+    </div>
 </div>
 </body>
 </html>
