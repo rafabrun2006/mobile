@@ -4,19 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="jquery.mobile143/jquery.mobile-1.4.3.css">
-    <script src="jquery-11.min.js"></script>
-    <script src="jquery.mobile143/jquery.mobile-1.4.3.min.js"></script>
-    <!--script src="jquery.mobile143/jquery.mobile-1.4.3.min.map"></script-->
-
-    <script src="angular/angular.min.js"></script>
-    <script src="angular/angular-route.min.js"></script>
-
-    <script src="firebase.js"></script>
-    <script src="firebase-simple-login.js"></script>
-    <script src="an.firebase.js"></script>
-
-    <script src="ConfigAngular.js"></script>
-    <script src="MainAngular.js"></script>
 </head>
 <body ng-app="App">
 <div data-role="page" id="main" ng-controller="Main">
@@ -24,6 +11,7 @@
         <h3>Útil</h3>
     </div>
     <p style="text-align: center;">Olá, {{ session.email }} o que temos pra agora?</p>
+
     <div data-role="main" class="ui-content">
         <button class="ui-btn ui-btn-b ui-corner-all">Roubo Auto</button>
         <button class="ui-btn ui-btn-b ui-corner-all">Assalto</button>
@@ -43,18 +31,49 @@
     </div>
     <div data-role="main" class="ui-content">
         Faça o seu cadastro para utilizar o aplicativo.
-        <br />
+        <br/>
+
         <p style="color: #ff0000; font-size: 10px; text-align: justify;">
             Importante: as suas informações não serão compartilhadas e nem acessadas por outro usuário,
             este e um aplicativo que leva muito a serio a segurança dos dados dos usuários cadastrados!
         </p>
+        <br/>
+        <input type="email" ng-model="Pessoa.email" placeholder="Endereço de E-mail" required="">
+        <input type="password" ng-model="Pessoa.senha" placeholder="Senha" required="">
+        <br/>
+
+        <div style="text-align: center;" data-role="" data-type="horizontal" data-mini="true">
+            <button ng-click="novoRegistro()"
+                    class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user ui-btn-b" data-role="">Registrar
+            </button>
+            <button ng-click="back()"
+                    class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user ui-btn-b" data-role="">Voltar
+            </button>
+        </div>
+    </div>
+    <div data-role="footer">
+        <h6>Todos os Direitos Reservado - 2014</h6>
+    </div>
+</div>
+<div data-role="page" id="login" ng-controller="Login">
+    <div data-role="header">
+        <h3>Útil - Cadastro</h3>
+    </div>
+    <div data-role="main" class="ui-content">
+        Faça o seu cadastro para utilizar o aplicativo.
+        <br />
         <br />
         <input type="email" ng-model="Pessoa.email" placeholder="Endereço de E-mail" required="">
         <input type="password" ng-model="Pessoa.senha" placeholder="Senha" required="">
-        <br />
+        <br/>
+
         <div style="text-align: center;" data-role="" data-type="horizontal" data-mini="true">
-            <button ng-click="novoRegistro()" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user ui-btn-b" data-role="">Registrar</button>
-            <button ng-click="esqueciMinhaSenha()" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-lock ui-btn-b">Esqueci Minha Senha</button>
+            <button ng-click="novoRegistro()"
+                    class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user ui-btn-b" data-role="">Registrar
+            </button>
+            <button ng-click="cadastro()"
+                    class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-lock ui-btn-b">Cadastrar-me
+            </button>
         </div>
     </div>
     <div data-role="footer">
@@ -62,4 +81,17 @@
     </div>
 </div>
 </body>
+<script src="jquery-11.min.js"></script>
+<script src="jquery.mobile143/jquery.mobile-1.4.3.min.js"></script>
+<!--script src="jquery.mobile143/jquery.mobile-1.4.3.min.map"></script-->
+
+<script src="angular/angular.min.js"></script>
+<script src="angular/angular-route.min.js"></script>
+
+<script src="firebase.js"></script>
+<script src="firebase-simple-login.js"></script>
+<script src="an.firebase.js"></script>
+
+<script src="ConfigAngular.js"></script>
+<script src="MainAngular.js"></script>
 </html>
