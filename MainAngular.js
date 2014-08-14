@@ -90,7 +90,7 @@ App.controller('Login', function ($log, $scope, FbaseSimpleLogin, Pessoa) {
             }).then(function (response) {
 
                 localStorage.setItem('session', JSON.stringify(response));
-                window.location.assign('#main');
+                window.location.href = '/';
 
             }).catch(function (response) {
                 alert('Usuário ou Senha incorreto(s)');
